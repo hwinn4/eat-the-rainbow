@@ -6,7 +6,8 @@ class FoodsController < ApplicationController
       date = Date.today
     end
 
-    @foods = current_user.daily_food_logs.find_by_date(date) || []
+    # TODO: Move to model? Use scopes?
+    @foods = current_user.daily_food_logs.where('date = ?', date)
     @colors = Food.colors
 
     render :index
