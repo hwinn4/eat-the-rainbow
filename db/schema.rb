@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_03_010545) do
+ActiveRecord::Schema.define(version: 2019_04_03_115112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,5 +35,17 @@ ActiveRecord::Schema.define(version: 2019_04_03_010545) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "foods", "users"
+
+  create_view "daily_food_logs",  sql_definition: <<-SQL
+      SELECT max(foods.id) AS id,
+      foods.user_id,
+      foods.color,
+      foods.date,
+      count(foods.color) AS color_count
+     FROM foods
+    GROUP BY foods.user_id, foods.color, foods.date;
+  SQL
 
 end
