@@ -2,17 +2,17 @@ module ApplicationHelper
   def color_map
     # TODO: Is there a better way to do this?
     {
-        'red' => '#B22230',
-        'orange' => '#FEA56C',
-        'yellow' => '#EBD175',
-        'green' => '#8DA05E',
-        'blue' => '#9AABBD',
-        'purple' => '#814F76',
-        'black' => '#26272A',
+        'red' => '#DC97A1',
+        'orange' => '#F1BAA6',
+        'yellow' => '#EEE6C1',
+        'green' => '#99A680',
+        'blue' => '#699FCE',
+        'purple' => '#D1CEE8',
+        'black' => '#4E5255',
         'white' => '#ECEBEB',
-        'tan' => '#C9A382',
-        'brown' => '#664C3E',
-        'null' => '#CCCCD2'
+        'tan' => '#DDCFCB',
+        'brown' => '#B18F83',
+        'null' => '#E0E1E3'
     }
   end
 end

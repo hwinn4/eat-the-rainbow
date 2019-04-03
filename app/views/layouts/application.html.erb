@@ -11,16 +11,18 @@
 
   <body>
     <div class="body-container">
+      <!-- TODO: Make partials -->
       <nav>
+
         <ul>
           <% if user_signed_in? %>
             <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-            <li>Hello, <%= current_user.email %></li>
+            <li class="account-menu">Hello, <%= current_user.email %></li>
           <% end %>
         </ul>
       </nav>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+<!--      <p class="notice"><%#= notice %></p>-->
+<!--      <p class="alert"><%#= alert %></p>-->
       <%= yield %>
     </div>
   </body>
