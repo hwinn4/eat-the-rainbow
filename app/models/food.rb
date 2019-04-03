@@ -5,18 +5,7 @@ class Food < ApplicationRecord
 
   before_save :convert_color_to_enum
 
-  enum color: %i[
-    red
-    orange
-    yellow
-    green
-    blue
-    purple
-    black
-    white
-    tan
-    brown
-  ]
+  include ColorEnum
 
   private
 
