@@ -10,13 +10,10 @@ input[type="submit"]:hover {
     border: 2px solid;
 }
 
-.color-selector {
+.color-selector, .daily-color-log {
     display: flex;
     flex-direction: column;
-}
-
-.color-selector > h3 {
-    width: 100%;
+    justify-content: space-between;
 }
 
 .daily-log-container {
@@ -24,17 +21,7 @@ input[type="submit"]:hover {
     margin: auto;
 }
 
-.color-picker {
-    display: flex;
-    flex-direction: row;
-}
-
-.daily-color-log {
-    display: flex;
-    flex-direction: column;
-}
-
-.daily-log-items {
+.color-picker, .daily-log-items  {
     display: flex;
     flex-direction: row;
 }

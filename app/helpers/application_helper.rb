@@ -1,5 +1,6 @@
 module ApplicationHelper
   def color_map
+    # TODO: Is there a better way to do this?
     {
         'red' => '#B22230',
         'orange' => '#FEA56C',
@@ -10,7 +11,8 @@ module ApplicationHelper
         'black' => '#26272A',
         'white' => '#ECEBEB',
         'tan' => '#C9A382',
-        'brown' => '#664C3E'
+        'brown' => '#664C3E',
+        'gray' => '#CCCCD2'
     }
   end
 end
