@@ -1,15 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe FoodsController do
-  describe '#index' do
-    it 'returns foods by date' do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = FactoryBot.create(:user)
-      sign_in user
-      get :index
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    user = FactoryBot.create(:user)
+    sign_in user
+  end
 
+  describe '#index' do
+    let(:foods) { Food.none }
+    let(:colors) { Food.colors }
+
+    it 'renders the index view' do
+      allow(Food).to receive(:query_by_date).and_return(foods)
+      get :index, params: { food: { date: Date.today } }
+
+      expect(assigns(:foods)).to eq(foods)
+      expect(assigns(:colors)).to eq(colors)
       expect(response.status).to eq(200)
       expect(response).to render_template(:index)
+    end
+  end
+
+  describe '#create' do
+    let(:params) { { date: Date.today, color: 'red' } }
+    let(:sanitized_params) { { date: Date.today, color: 0 } }
+    let(:new_food) { mock_model(Food, save: true) }
+
+    it 'redirects to the index' do
+      allow(Food).to receive(:new).and_return(new_food)
+      post :create, params: { food: params }
+
+      expect(response).to redirect_to('index')
     end
   end
 end

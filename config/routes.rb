@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resources :foods, only: [:index]
+  resources :foods, only: [:index, :create]
 end
