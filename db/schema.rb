@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_04_03_115112) do
   create_table "foods", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "color"
-    t.date "date", null: false
+    t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
