@@ -12,7 +12,7 @@ module ApplicationHelper
         'white' => '#ECEBEB',
         'tan' => '#C9A382',
         'brown' => '#664C3E',
-        'gray' => '#CCCCD2'
+        'null' => '#CCCCD2'
     }
   end
 end

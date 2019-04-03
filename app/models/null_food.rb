@@ -1,5 +1,6 @@
 class NullFood
-  def color
-    'gray'
+  attr_reader :color
+  def initialize(color)
+    @color = color
   end
 end

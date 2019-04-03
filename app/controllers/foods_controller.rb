@@ -6,7 +6,7 @@ class FoodsController < ApplicationController
       @date = Date.today
     end
 
-    @foods = DailyFoodLog.full_day_log(current_user.id, @date)
+    @foods = DailyFoodLog.sorted_full_day_log(current_user.id, @date)
     @colors = Food.colors
 
     render :index
