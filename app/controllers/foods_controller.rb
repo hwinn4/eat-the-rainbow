@@ -12,9 +12,9 @@ class FoodsController < ApplicationController
   end
 
   def create
-    food = Food.new(new_food_params)
+    food = current_user.foods.build(new_food_params)
     if food.save
-      redirect_to 'index'
+      redirect_to '/foods'
     end
   end
 
