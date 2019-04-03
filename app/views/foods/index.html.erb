@@ -1,20 +1,33 @@
-<h3>Enter date</h3>
-<%= form_tag('/foods', method: 'get') do %>
-  <%= label_tag('food[date]', "Date:") %>
-  <%= text_field_tag('food[date]') %>
-  <%= submit_tag("Submit") %>
-<% end %>
-
-<h3>What Colors Did You Enjoy on <%= @date %>?</h3>
-<% @colors.each do |color| %>
-  <%= form_tag('/foods', method: 'post') do %>
-    <%= hidden_field_tag('food[color]', color.first) %>
-    <%= hidden_field_tag('food[date]', @date) %>
-    <%= submit_tag("#{color.first}") %>
+<div class="daily-log-container">
+  <h3>Enter date</h3>
+  <%= form_tag('/foods', method: 'get') do %>
+    <%= label_tag('food[date]', "Date:") %>
+    <%= text_field_tag('food[date]', nil, placeholder: 'mm/dd/yyyy') %>
+    <%= submit_tag("Submit") %>
   <% end %>
-<% end %>
 
-<h3>Color Log (<%= @date %>)</h3>
-<% @foods.each do |food| %>
-  <p><%= food.color %> - <%= food.color_count %></p>
-<% end %>
+  <div class="color-selector">
+    <div>
+      <h3>What Colors Did You Enjoy on <%= @date %>?</h3>
+    </div>
+    <div class="color-picker">
+      <% @colors.each do |color| %>
+        <%= form_tag('/foods', method: 'post') do %>
+          <%= hidden_field_tag('food[color]', color.first) %>
+          <%= hidden_field_tag('food[date]', @date) %>
+          <%= submit_tag("", options={class: "color-submit", style: "background-color: #{color_map[color.first]};"}) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="daily-color-log">
+    <h3>Color Log (<%= @date %>)</h3>
+    <div class="daily-log-items">
+      <% @foods.each do |food| %>
+        <div class="daily-log-item" style="background-color: <%= color_map[food.color] %>;"></div>
+    <!--    <p><%#= food.color %> - <%#= food.color_count %></p>-->
+      <% end %>
+    </div>
+  </div>
+</div>

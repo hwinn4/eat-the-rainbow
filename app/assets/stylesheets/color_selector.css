@@ -1,0 +1,40 @@
+.daily-log-item, .color-submit {
+    font-size: 12px;
+    margin: 2px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+input[type="submit"]:hover {
+    border: 2px solid;
+}
+
+.color-selector {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-selector > h3 {
+    width: 100%;
+}
+
+.daily-log-container {
+    width: 50%;
+    margin: auto;
+}
+
+.color-picker {
+    display: flex;
+    flex-direction: row;
+}
+
+.daily-color-log {
+    display: flex;
+    flex-direction: column;
+}
+
+.daily-log-items {
+    display: flex;
+    flex-direction: row;
+}
