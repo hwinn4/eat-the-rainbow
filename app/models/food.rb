@@ -18,8 +18,11 @@ class Food < ApplicationRecord
     brown
   ]
 
-  def self.query_by_date(user_id, date)
-    Food.where('date = ? AND user_id = ?', user_id, date)
+  def self.find_daily_log(user_id, date)
+    # Food.group(:user_id, :date, :color).having('date = ? AND user_id = ?', user_id, date)
+    # Food.where('date = ? AND user_id = ?', user_id, date).group(:color)
+    # TODO: implement a sql view to count colors by day and generate a log view?
+    Food.select(:date, :color, :user_id).group(:user_id, :date, :color).having('date = ? AND user_id = ?', user_id, date)
   end
 
   private

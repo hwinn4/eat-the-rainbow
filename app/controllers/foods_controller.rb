@@ -6,8 +6,9 @@ class FoodsController < ApplicationController
       date = Date.today
     end
 
-    @foods = Food.query_by_date(date, current_user.id)
+    @foods = Food.find_daily_log(date, current_user.id)
     @colors = Food.colors
+
     render :index
   end
 
@@ -15,6 +16,11 @@ class FoodsController < ApplicationController
     food = current_user.foods.build(new_food_params)
     if food.save
       redirect_to '/foods'
+    else
+      # TODO: Address
+      @colors = Food.colors
+      flash.now[:message] = 'error!'
+      render :index
     end
   end
 
