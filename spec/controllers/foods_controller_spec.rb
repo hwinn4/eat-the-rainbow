@@ -12,7 +12,7 @@ RSpec.describe FoodsController do
     let(:colors) { Food.colors }
 
     it 'renders the index view' do
-      allow(Food).to receive(:query_by_date).and_return(foods)
+      allow(Food).to receive(:find_daily_log).and_return(foods)
       get :index, params: { food: { date: Date.today } }
 
       expect(assigns(:foods)).to eq(foods)
@@ -24,14 +24,13 @@ RSpec.describe FoodsController do
 
   describe '#create' do
     let(:params) { { date: Date.today, color: 'red' } }
-    let(:sanitized_params) { { date: Date.today, color: 0 } }
     let(:new_food) { mock_model(Food, save: true) }
 
     it 'redirects to the index' do
       allow(Food).to receive(:new).and_return(new_food)
       post :create, params: { food: params }
 
-      expect(response).to redirect_to('index')
+      expect(response).to redirect_to('/foods')
     end
   end
 end

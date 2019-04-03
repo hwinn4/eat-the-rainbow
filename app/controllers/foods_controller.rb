@@ -14,13 +14,10 @@ class FoodsController < ApplicationController
 
   def create
     food = current_user.foods.build(new_food_params)
+    # TODO: Else!
     if food.save
+      # TODO: Use render or redirect_to?
       redirect_to '/foods'
-    else
-      # TODO: Address
-      @colors = Food.colors
-      flash.now[:message] = 'error!'
-      render :index
     end
   end
 
