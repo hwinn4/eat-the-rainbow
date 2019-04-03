@@ -15,4 +15,8 @@ class Food < ApplicationRecord
     tan
     brown
   ]
+
+  def self.query_by_date(user_id, date)
+    Food.where('date = ? AND user_id = ?', user_id, date)
+  end
 end
