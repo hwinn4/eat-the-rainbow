@@ -15,7 +15,9 @@
         <%= form_tag('/foods', method: 'post') do %>
           <%= hidden_field_tag('food[color]', color.first) %>
           <%= hidden_field_tag('food[date]', @date) %>
-          <%= submit_tag("", options={class: "color-submit", style: "background-color: #{color_map[color.first]};"}) %>
+          <%= submit_tag("", options={
+            class: "color-submit",
+            style: "background-color: #{color_map[color.first]};"}) %>
         <% end %>
       <% end %>
     </div>
@@ -27,9 +29,21 @@
       <!-- TODO: is this the best way to do this? -->
       <% @foods.each do |food| %>
         <% if food.is_a?(NullFood) %>
-          <div class="daily-log-item" style="background-color: <%= color_map['null'] %>;"></div>
+          <div
+            class="daily-log-item"
+            style="background-color: <%= color_map['null'] %>;"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title=<%= food.color_count %>>
+          </div>
         <% else %>
-          <div class="daily-log-item" style="background-color: <%= color_map[food.color] %>;"></div>
+          <div
+            class="daily-log-item"
+            style="background-color: <%= color_map[food.color] %>;"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title=<%= food.color_count %>>
+          </div>
         <% end %>
       <% end %>
     </div>
