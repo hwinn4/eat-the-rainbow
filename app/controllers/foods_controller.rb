@@ -1,10 +1,8 @@
 class FoodsController < ApplicationController
+  include DateHelper
+
   def index
-    if params[:food]
-      @date = format_date(food_query_params[:date])
-    else
-      @date = Date.today
-    end
+    @date = params[:food] ? food_query_params[:date] : date_to_string(Date.today)
 
     @foods = DailyFoodLog.sorted_full_day_log(current_user.id, @date)
     @should_celebrate = @foods.none? { |food| food.is_a? NullFood }
@@ -14,9 +12,9 @@ class FoodsController < ApplicationController
   end
 
   def create
-    format_date(new_food_params[:date])
+    string_to_date(new_food_params[:date])
     food = current_user.foods.build(new_food_params)
-    # TODO: Else!
+    # TODO: Else! 
     if food.save
       # TODO: Use render or redirect_to?
       redirect_to "/foods?food[date]=#{new_food_params[:date]}"
@@ -35,13 +33,5 @@ class FoodsController < ApplicationController
 
   def new_food_params
     params.require(:food).permit(:date, :color)
-  end
-
-  def format_date(date)
-    begin
-      Date.strptime(date, '%m/%d/%Y')
-    rescue
-      Date.strptime(date, '%Y-%m-%d')
-    end
   end
 end
