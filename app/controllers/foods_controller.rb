@@ -7,6 +7,7 @@ class FoodsController < ApplicationController
     end
 
     @foods = DailyFoodLog.sorted_full_day_log(current_user.id, @date)
+    @should_celebrate = @foods.none? { |food| food.is_a? NullFood }
     @colors = Food.colors
 
     render :index

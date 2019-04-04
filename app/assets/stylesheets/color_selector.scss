@@ -24,4 +24,11 @@ input[type="submit"]:hover {
 .color-picker, .daily-log-items  {
     display: flex;
     flex-direction: row;
+.celebrate {
+  color: cyan;
+  font-size: 30px;
+  animation-duration: 2s;
+  animation-name: bounceIn;
+  //border: 1px solid black;
+}
 }
