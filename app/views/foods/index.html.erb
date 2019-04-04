@@ -1,11 +1,12 @@
 <div class="daily-log-container">
-  <h3>Enter date</h3>
-  <%= form_tag('/foods', method: 'get') do %>
-    <%= label_tag('food[date]', "Date:") %>
-    <%= text_field_tag('food[date]', nil, placeholder: 'mm/dd/yyyy') %>
-    <%= submit_tag("Submit") %>
-  <% end %>
-
+  <div class="select-date">
+    <h3>Enter date</h3>
+    <%= form_tag('/foods', method: 'get') do %>
+      <%= label_tag('food[date]', "Date:") %>
+      <%= text_field_tag('food[date]', nil, placeholder: 'mm/dd/yyyy') %>
+      <%= submit_tag("Submit") %>
+    <% end %>
+  </div>
   <div class="color-selector">
     <div>
       <h3>Select a Color</h3>
@@ -26,7 +27,7 @@
   <div class="daily-color-log">
     <h3>Color Log (<%= @date %>)</h3>
     <div class="daily-log-items">
-      <!-- TODO: is this the best way to do this? -->
+      <!-- TODO: is this the best way to do this with null obj? Also: move to partials -->
       <% @foods.each do |food| %>
         <% if food.is_a?(NullFood) %>
           <div
@@ -40,7 +41,7 @@
           <%= form_tag("/foods/#{food.id}", method: 'delete') do %>
             <%= hidden_field_tag('food[date]', @date) %>
             <%= submit_tag("#{food.color_count}", options={
-                class: "color-submit",
+                class: "color-submit remove-from-log",
                 style: "background-color: #{color_map[food.color]};"}) %>
           <% end %>
         <% end %>
