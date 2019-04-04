@@ -37,13 +37,12 @@
             title=<%= food.color_count %>>
           </div>
         <% else %>
-          <div
-            class="daily-log-item"
-            style="background-color: <%= color_map[food.color] %>;"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title=<%= food.color_count %>>
-          </div>
+          <%= form_tag("/foods/#{food.id}", method: 'delete') do %>
+            <%= hidden_field_tag('food[date]', @date) %>
+            <%= submit_tag("#{food.color_count}", options={
+                class: "color-submit",
+                style: "background-color: #{color_map[food.color]};"}) %>
+          <% end %>
         <% end %>
       <% end %>
     </div>

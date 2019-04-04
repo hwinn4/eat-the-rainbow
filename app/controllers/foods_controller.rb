@@ -22,6 +22,11 @@ class FoodsController < ApplicationController
     end
   end
 
+  def destroy
+    Food.destroy(params[:id])
+    redirect_to "/foods?food[date]=#{food_query_params[:date]}"
+  end
+
   private
   def food_query_params
     params.require(:food).permit(:date)
