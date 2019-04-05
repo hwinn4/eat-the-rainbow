@@ -1,14 +1,9 @@
-h3 {
-  font: inherit;
-}
-
 .daily-log-item, .color-submit {
   font-size: 12px;
   margin-right: 20px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  //border: 1px solid black;
 }
 
 input[type="submit"]:hover {
@@ -23,19 +18,16 @@ input[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  //border: 1px solid black;
 }
 
 .daily-log-container {
   width: 80%;
   margin: auto;
-  //border: 1px solid black;
 }
 
 .color-picker, .daily-log-items  {
   display: flex;
   flex-direction: row;
-  //border: 1px solid black;
   flex-wrap: wrap;
 }
 
@@ -44,9 +36,20 @@ input[type="submit"]:hover {
   font-size: 30px;
   animation-duration: 2s;
   animation-name: bounceIn;
-  //border: 1px solid black;
 }
 
-.daily-log-container > div {
-  margin-top: 35px;
+.color-selector {
+  margin-top: 30px;
+}
+
+.daily-color-log {
+  margin-top: 75px;
+}
+
+.date-submit {
+  color: $brand2;
+  background-color: white;
+  border: 1px solid $brand;
+  text-decoration: none;
+  margin: 4px 2px;
 }

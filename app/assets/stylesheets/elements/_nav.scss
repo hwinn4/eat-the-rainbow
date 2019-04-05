@@ -6,9 +6,8 @@ nav > ul {
     list-style: none;
 }
 
-/* TODO: Introduce CSS variables */
 .account-menu {
-    color: #838079;
+    color: $brand;
     font-weight: bold;
 }
 
@@ -22,7 +21,3 @@ nav > ul > li {
     min-height:600px;
 }
 
-a {
-    text-decoration: none;
-    color: #A89C9A;
-}
