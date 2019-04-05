@@ -11,10 +11,11 @@ RSpec.describe FoodsController do
   describe '#index' do
     let(:foods) { double(ActiveRecord::Relation, find: []) }
     let(:colors) { Food.colors }
+    let(:daily_food_log_double) { double('daily food log', sorted_full_day_log: [], has_all_colors?: false) }
 
     it 'renders the index view' do
-      allow(DailyFoodLog).to receive(:sorted_full_day_log).and_return([])
-      allow(DailyFoodLog).to receive(:has_all_colors?).and_return(false)
+      allow(FoodByDay).to receive(:search).and_return(FoodByDay.none)
+      allow(DailyFoodLog).to receive(:new).and_return(daily_food_log_double)
 
       get :index, params: { food: { date: Date.today } }
 

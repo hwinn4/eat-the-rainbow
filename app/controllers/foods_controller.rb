@@ -4,8 +4,10 @@ class FoodsController < ApplicationController
   def index
     @date = params[:food] ? food_query_params[:date] : date_to_string(Date.today)
 
-    @foods = DailyFoodLog.sorted_full_day_log(current_user.id, @date)
-    @should_celebrate = DailyFoodLog.has_all_colors?(@foods)
+    foods = FoodByDay.search(current_user.id, @date)
+    log = DailyFoodLog.new(foods, current_user.id, @date)
+    @foods = log.sorted_full_day_log
+    @should_celebrate = log.has_all_colors?
     @colors = Food.colors
 
     render :index
