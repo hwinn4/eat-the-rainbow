@@ -33,10 +33,11 @@ input[type="submit"]:hover {
 }
 
 .celebrate {
-  color: cyan;
-  font-size: 30px;
+  color: $brand2;
+  font-size: 100px;
   animation-duration: 2s;
   animation-name: bounceIn;
+  margin-left: 2px;
 }
 
 .color-selector {
