@@ -20,4 +20,20 @@ RSpec.describe DailyFoodLog do
       expect(return_val.last).to be_a_kind_of(DailyFoodLog)
     end
   end
+
+  describe '.has_all_colors?' do
+    context 'when the users has recorded at least 1 instance of each color' do
+      let(:foods) { [mock_model(Food), mock_model(Food)] }
+      it 'returns true' do
+        expect(DailyFoodLog.has_all_colors?(foods)).to eq(true)
+      end
+    end
+
+    context 'when the users has not recorded all of the colors' do
+      let(:foods) { [mock_model(Food), NullFood.new('blue')] }
+      it 'returns false' do
+        expect(DailyFoodLog.has_all_colors?(foods)).to eq(false)
+      end
+    end
+  end
 end

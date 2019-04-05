@@ -1,4 +1,5 @@
 require 'rails_helper'
+include DateHelper
 
 RSpec.describe FoodsController do
   let(:user) { FactoryBot.create(:user) }
@@ -8,14 +9,17 @@ RSpec.describe FoodsController do
   end
 
   describe '#index' do
-    let(:foods) { double(ActiveRecord::Relation, find_by_date: nil) }
+    let(:foods) { double(ActiveRecord::Relation, find: []) }
     let(:colors) { Food.colors }
 
     it 'renders the index view' do
-      allow(user).to receive(:daily_food_logs).and_return(foods)
+      allow(DailyFoodLog).to receive(:sorted_full_day_log).and_return([])
+      allow(DailyFoodLog).to receive(:has_all_colors?).and_return(false)
+
       get :index, params: { food: { date: Date.today } }
 
       expect(assigns(:foods)).to eq([])
+      expect(assigns(:should_celebrate)).to eq(false)
       expect(assigns(:colors)).to eq(colors)
       expect(response.status).to eq(200)
       expect(response).to render_template(:index)
@@ -23,15 +27,24 @@ RSpec.describe FoodsController do
   end
 
   describe '#create' do
-    let(:params) { { date: Date.today, color: 'red' } }
-    let(:new_food) { mock_model(Food, save: true) }
+    let(:date_string) { '03/04/2019' }
+    let(:date) { string_to_date(date_string) }
+    let(:params) { { date: date, color: 'red' } }
+    let(:new_food) { mock_model(Food, save: true, date: date) }
 
     it 'redirects to the foods index' do
       allow(user).to receive(:foods).and_return(Food.none)
       allow(Food.none).to receive(:build).with(params).and_return(new_food)
       post :create, params: { food: params }
 
-      expect(response).to redirect_to('/foods')
+      expect(response).to redirect_to("/foods?food[date]=#{date_string}")
+    end
+  end
+
+  describe '#destroy' do
+    it 'removes the specified record from the database' do
+      expect(Food).to receive(:destroy).with('1')
+      delete :destroy, params: { id: 1, food: { date: '3/4/2019' } }
     end
   end
 end

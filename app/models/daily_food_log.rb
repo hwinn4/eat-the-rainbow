@@ -26,6 +26,10 @@ class DailyFoodLog < ActiveRecord::Base
     sorted_log
   end
 
+  def self.has_all_colors?(foods)
+    foods.none? { |food| food.is_a? NullFood }
+  end
+
   # this isn't strictly necessary, but it will prevent
   # rails from calling save, which would fail anyway.
   def readonly?

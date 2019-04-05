@@ -5,7 +5,7 @@ class FoodsController < ApplicationController
     @date = params[:food] ? food_query_params[:date] : date_to_string(Date.today)
 
     @foods = DailyFoodLog.sorted_full_day_log(current_user.id, @date)
-    @should_celebrate = @foods.none? { |food| food.is_a? NullFood }
+    @should_celebrate = DailyFoodLog.has_all_colors?(@foods)
     @colors = Food.colors
 
     render :index
@@ -14,10 +14,10 @@ class FoodsController < ApplicationController
   def create
     params['food']['date'] = string_to_date(new_food_params[:date])
     food = current_user.foods.build(new_food_params)
-    # TODO: Else! 
+    # TODO: Else!
     if food.save
       # TODO: Use render or redirect_to?
-      redirect_to "/foods?food[date]=#{new_food_params[:date]}"
+      redirect_to "/foods?food[date]=#{date_to_string(food.date)}"
     end
   end
 
