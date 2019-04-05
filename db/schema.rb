@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2019_04_03_115112) do
 
   add_foreign_key "foods", "users"
 
-  create_view "daily_food_logs",  sql_definition: <<-SQL
+  create_view "food_by_days",  sql_definition: <<-SQL
       SELECT max(foods.id) AS id,
       foods.user_id,
       foods.color,
