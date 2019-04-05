@@ -10,4 +10,8 @@ module DateHelper
   def date_to_string(date)
     date.strftime('%m/%d/%Y')
   end
+
+  def index_date(date)
+    date.is_a?(Date) ? date_to_string(date) : date
+  end
 end

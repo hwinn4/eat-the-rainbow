@@ -5,7 +5,6 @@ RSpec.describe DateHelper do
 
   subject { klass.new }
 
-  # TODO: Use in create
   describe '#string_to_date' do
     context 'when given a string' do
       it 'returns the date in mm/dd/yyyy format' do
@@ -15,10 +14,23 @@ RSpec.describe DateHelper do
     end
   end
 
-  # TODO: Use in index
   describe '#date_to_string' do
     it 'returns the date in mm/dd/yyyy format' do
       expect(subject.date_to_string(Date.new(2001,2,3))).to eq('02/03/2001')
+    end
+  end
+
+  describe '#index_date' do
+    context 'when the date is the default date (today)' do
+      it 'returns the date in the mm/dd/yyyy format' do
+        expect(subject.index_date(Date.today)).to eq(Date.today.strftime('%m/%d/%Y'))
+      end
+    end
+
+    context 'when the date is submitted by the user in mm/dd/yyyy format' do
+      it 'returns the date as-is' do
+        expect(subject.index_date('04/04/2019')).to eq('04/04/2019')
+      end
     end
   end
 end

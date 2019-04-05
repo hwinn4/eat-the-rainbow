@@ -2,7 +2,8 @@ class FoodsController < ApplicationController
   include DateHelper
 
   def index
-    @date = params[:food] ? food_query_params[:date] : date_to_string(Date.today)
+    date = params[:food] ? food_query_params[:date] : Date.today
+    @date = index_date(date)
 
     foods = FoodByDay.search(current_user.id, @date)
     log = DailyFoodLog.new(foods, current_user.id, @date)
