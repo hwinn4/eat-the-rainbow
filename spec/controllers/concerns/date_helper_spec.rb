@@ -9,7 +9,8 @@ RSpec.describe DateHelper do
   describe '#string_to_date' do
     context 'when given a string' do
       it 'returns the date in mm/dd/yyyy format' do
-        expect(subject.string_to_date('2019-03-01')).to eq(Date.new(2019,3,1))
+        expect(subject.string_to_date('3/1/2019')).to eq(Date.new(2019,3,1))
+        expect(subject.string_to_date('2019-3-1')).to eq(Date.new(2019,3,1))
       end
     end
   end

@@ -12,7 +12,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    string_to_date(new_food_params[:date])
+    params['food']['date'] = string_to_date(new_food_params[:date])
     food = current_user.foods.build(new_food_params)
     # TODO: Else! 
     if food.save
