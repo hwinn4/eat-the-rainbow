@@ -1,0 +1,8 @@
+<div class="select-date">
+  <h2>Enter date</h2>
+  <%= form_tag('/foods', method: 'get') do %>
+    <%= label_tag('food[date]', "") %>
+    <%= text_field_tag('food[date]', nil, placeholder: 'mm/dd/yyyy') %>
+    <%= submit_tag("Submit", options={class: "date-submit"}) %>
+  <% end %>
+</div>

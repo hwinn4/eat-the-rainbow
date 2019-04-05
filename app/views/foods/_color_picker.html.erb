@@ -1,0 +1,16 @@
+<div class="color-selector">
+  <div>
+    <h2>Select a Color</h2>
+  </div>
+  <div class="color-picker">
+    <% @colors.each do |color| %>
+      <%= form_tag('/foods', method: 'post') do %>
+        <%= hidden_field_tag('food[color]', color.first) %>
+        <%= hidden_field_tag('food[date]', @date) %>
+        <%= submit_tag("", options={
+            class: "color-submit",
+            style: "background-color: #{color_map[color.first]};"}) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

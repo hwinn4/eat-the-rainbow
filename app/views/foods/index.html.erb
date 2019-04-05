@@ -1,57 +1,7 @@
 <div class="daily-log-container">
-  <div class="select-date">
-    <h3>Enter date</h3>
-    <%= form_tag('/foods', method: 'get') do %>
-      <%= label_tag('food[date]', "Date:") %>
-      <%= text_field_tag('food[date]', nil, placeholder: 'mm/dd/yyyy') %>
-      <%= submit_tag("Submit") %>
-    <% end %>
-  </div>
-  <div class="color-selector">
-    <div>
-      <h3>Select a Color</h3>
-    </div>
-    <div class="color-picker">
-      <% @colors.each do |color| %>
-        <%= form_tag('/foods', method: 'post') do %>
-          <%= hidden_field_tag('food[color]', color.first) %>
-          <%= hidden_field_tag('food[date]', @date) %>
-          <%= submit_tag("", options={
-            class: "color-submit",
-            style: "background-color: #{color_map[color.first]};"}) %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="daily-color-log">
-    <h3>Color Log (<%= @date %>)</h3>
-    <div class="daily-log-items">
-      <!-- TODO: is this the best way to do this with null obj? Also: move to partials -->
-      <% @foods.each do |food| %>
-        <% if food.is_a?(NullFood) %>
-          <div
-            class="daily-log-item"
-            style="background-color: <%= color_map['null'] %>;"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title=<%= food.color_count %>>
-          </div>
-        <% else %>
-          <%= form_tag("/foods/#{food.id}", method: 'delete') do %>
-            <%= hidden_field_tag('food[date]', @date) %>
-            <%= submit_tag("#{food.color_count}", options={
-                class: "color-submit remove-from-log",
-                style: "background-color: #{color_map[food.color]};"}) %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <% if @should_celebrate %>
-    <div class="celebrate">
-      All the colors!
-    </div>
-  <% end %>
+  <%= render 'select_date' %>
+  <%= render 'color_picker' %>
+  <hr>
+  <%= render 'color_log' %>
+  <%= render 'celebrate' %>
 </div>

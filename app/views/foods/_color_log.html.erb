@@ -1,0 +1,24 @@
+<div class="daily-color-log">
+  <h2>Color Log for <%= @date %></h2>
+  <div class="daily-log-items">
+    <!-- TODO: is this the best way to do this with null obj? -->
+    <% @foods.each do |food| %>
+      <% if food.is_a?(NullFood) %>
+        <div
+          class="daily-log-item"
+          style="background-color: <%= color_map['null'] %>;"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title=<%= food.color_count %>>
+        </div>
+      <% else %>
+        <%= form_tag("/foods/#{food.id}", method: 'delete') do %>
+          <%= hidden_field_tag('food[date]', @date) %>
+          <%= submit_tag("#{food.color_count}", options={
+              class: "color-submit remove-from-log",
+              style: "background-color: #{color_map[food.color]};"}) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
