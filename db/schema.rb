@@ -47,5 +47,4 @@ ActiveRecord::Schema.define(version: 2019_04_03_115112) do
      FROM foods
     GROUP BY foods.user_id, foods.color, foods.date;
   SQL
-
 end

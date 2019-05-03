@@ -1,7 +1,6 @@
 <div class="daily-color-log">
   <h2>Color Log for <%= @date %></h2>
   <div class="daily-log-items">
-    <!-- TODO: is this the best way to do this with null obj? -->
     <% @foods.each do |food| %>
       <% if food.is_a?(NullFood) %>
         <div
